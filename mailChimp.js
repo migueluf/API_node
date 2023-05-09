@@ -14,15 +14,18 @@ mailchimp.setConfig({
 const express = require("express")
 
 const app = express()
-const port = 9000
+//const port = 9000
+const port = 3000
 
 app.get("/mailchimp/send", (req, res) => {
     const name = req.query.name;
     const email = req.query.email;
     console.log(email)
 
-   // sendMailChimp(name,email)
+    sendMailChimp(name,email)
     res.send("Conecção feita")
+
+    
     
 })
 
@@ -36,28 +39,10 @@ async function sendMailChimp(name, email){
         email: email
       };
 
-      //console.log(subscribingUserAirTable.email);
-
+      console.log(subscribingUserAirTable.email);
+ 
+   
     
-    async function run() {
-
-    const response = await mailchimp.lists.addListMember(listId, {
-        email_address: subscribingUserAirTable.email,
-        status: "subscribed",
-        merge_fields: {
-        FNAME: subscribingUserAirTable.name        
-        }
-
-    });
-    
-    console.log(
-        `Successfully added contact as an audience member. The contact's id is ${
-        response.id
-        }.`
-    ); 
-    }
-
-    run();
 } 
 
-app.listen(port, () => console.log('API rodando na porta 3000'))
+app.listen(port, () => console.log('API rodando na porta 3000'));
